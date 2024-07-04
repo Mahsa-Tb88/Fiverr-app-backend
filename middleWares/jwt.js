@@ -10,8 +10,7 @@ export const verifyToken = (req, res, next) => {
 
     req.userId = payload.id;
     req.isSeller = payload.isSeller;
-    console.log(req.isSeller);
-    
+
     next();
   });
 };

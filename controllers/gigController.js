@@ -28,6 +28,7 @@ export async function deleteGig(req, res, next) {
   }
 }
 export async function getGig(req, res, next) {
+  console.log(req.params.id);
   try {
     const gig = await Gig.findById(req.params.id);
     if (!gig) return next(createdError(404, "Gig was not found"));
@@ -37,8 +38,17 @@ export async function getGig(req, res, next) {
   }
 }
 export async function getGigs(req, res, next) {
+  const q = req.query;
+  const filter = {
+    ...(q.cat && { cat: q.cat }),
+    ...(q.userId && { userId: q.userId }),
+    ...((q.min || q.max) && {
+      price: { ...(q.min && { $gt: q.min }), ...(q.max && { $lt: q.max }) },
+    }),
+    ...(q.search && { title: { $regex: q.search, $options: "i" } }),
+  };
   try {
-    const gigs = await Gig.find();
+    const gigs = await Gig.find(filter).sort({ [q.sort]: -1 });
     res.status(201).send(gigs);
   } catch (err) {
     next(err);

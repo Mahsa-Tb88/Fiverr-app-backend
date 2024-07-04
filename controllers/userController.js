@@ -12,3 +12,13 @@ export async function deleteUser(req, res) {
     res.status(500).send("something went wrong");
   }
 }
+
+export async function getUser(req, res) {
+  try {
+    const user = await User.findById(req.params.id);
+
+    res.status(201).send(user);
+  } catch (e) {
+    res.status(500).send("something went wrong");
+  }
+}
