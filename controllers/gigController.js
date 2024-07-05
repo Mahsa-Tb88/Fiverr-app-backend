@@ -28,7 +28,6 @@ export async function deleteGig(req, res, next) {
   }
 }
 export async function getGig(req, res, next) {
-  console.log(req.params.id);
   try {
     const gig = await Gig.findById(req.params.id);
     if (!gig) return next(createdError(404, "Gig was not found"));
