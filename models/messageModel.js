@@ -2,10 +2,9 @@ import mongoose from "mongoose";
 
 const messageSchema = new mongoose.Schema(
   {
-    id: {
+    conversationId: {
       type: String,
       required: true,
-      unique: true,
     },
     userId: {
       type: String,
@@ -16,7 +15,9 @@ const messageSchema = new mongoose.Schema(
       required: true,
     },
   },
-  { timestamps: true }
+  {
+    timestamps: true,
+  }
 );
 
 const Message = mongoose.model("Message", messageSchema);

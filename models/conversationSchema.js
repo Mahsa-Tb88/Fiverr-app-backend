@@ -7,11 +7,12 @@ const conversationSchema = new mongoose.Schema(
       required: true,
       unique: true,
     },
-    userId: {
+
+    sellerId: {
       type: String,
       required: true,
     },
-    sellerId: {
+    buyerId: {
       type: String,
       required: true,
     },
@@ -24,7 +25,7 @@ const conversationSchema = new mongoose.Schema(
       default: false,
     },
     lastMessage: {
-      type: Boolean,
+      type: String,
       default: false,
     },
   },
