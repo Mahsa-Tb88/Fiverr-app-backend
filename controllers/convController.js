@@ -1,4 +1,5 @@
 import Conversation from "../models/conversationSchema.js";
+import createdError from "../utils/createdError.js";
 
 export async function createConversation(req, res, next) {
   const newConversation = new Conversation({
@@ -28,9 +29,10 @@ export async function updateConversation(req, res, next) {
     next(err);
   }
 }
-export async function getConversation(req, res, next) {
+export async function getSingleConversation(req, res, next) {
   try {
     const conversation = await Conversation.findOne({ id: req.params.id });
+    if (!conversation) return next(createdError(404, "not found"));
     res.status(201).send(conversation);
   } catch (err) {
     next(err);
@@ -40,7 +42,7 @@ export async function getConversations(req, res, next) {
   try {
     const conversations = await Conversation.find(
       req.isSeller ? { sellerId: req.userId } : { buyerId: req.userId }
-    );
+    ).sort({ updatedAt: -1 });
     res.status(201).send(conversations);
   } catch (err) {
     next(err);

@@ -22,9 +22,9 @@ app.use(cookieParser());
 app.use(corsMiddleware);
 
 app.use("/auth", authRoutes);
-app.use("/api/conversation", convRoutes);
+app.use("/api/conversations", convRoutes);
 app.use("/api/gig", gigRoutes);
-app.use("/api/message", messageRoutes);
+app.use("/api/messages", messageRoutes);
 app.use("/api/order", orderRoutes);
 app.use("/api/review", reviewRoutes);
 app.use("/api/user", userRoutes);

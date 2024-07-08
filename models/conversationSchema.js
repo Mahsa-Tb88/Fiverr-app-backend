@@ -26,7 +26,6 @@ const conversationSchema = new mongoose.Schema(
     },
     lastMessage: {
       type: String,
-      default: false,
     },
   },
   { timestamps: true }
