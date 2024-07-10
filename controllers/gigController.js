@@ -36,6 +36,17 @@ export async function getGig(req, res, next) {
     next(err);
   }
 }
+export async function getGigsUser(req, res, next) {
+  console.log(req.userId,",,,,");
+  try {
+    const gig = await Gig.find({ userId: req.userId });
+    if (!gig) return next(createdError(404, "Gig was not found"));
+    console.log(gig)
+    res.status(201).send(gig);
+  } catch (err) {
+    next(err);
+  }
+}
 export async function getGigs(req, res, next) {
   const q = req.query;
   const filter = {
