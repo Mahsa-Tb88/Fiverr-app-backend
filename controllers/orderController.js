@@ -56,6 +56,7 @@ export async function getOrders(req, res, next) {
       ...(req.isSeller ? { sellerId: req.userId } : { buyerId: req.userId }),
       isCompleted: true,
     });
+
     res.status(201).send(orders);
   } catch (err) {
     next(err);
